@@ -307,8 +307,8 @@ class _OpenStreetMapSearchAndPickState
                                 Alert(
                                     type: AlertType.warning,
                                     context: context,
-                                    title: "Lokasi tidak ditemukan",
-                                    desc: "coba cari lagi",
+                                    desc:
+                                        "Lokasi yang anda cari tidak ditemukan",
                                     buttons: [
                                       DialogButton(
                                         color: Colors.green,
