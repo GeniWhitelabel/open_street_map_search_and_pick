@@ -278,9 +278,13 @@ class _OpenStreetMapSearchAndPickState
                       ),
                       onChanged: (String value) {
                         if (_debounce?.isActive ?? false) _debounce?.cancel();
-
                         _debounce =
-                            Timer(const Duration(milliseconds: 2000), () async {
+                            Timer(const Duration(milliseconds: 1000), () async {
+                          EasyLoading.show(
+                            status: 'sedang diproses',
+                            maskType: EasyLoadingMaskType.black,
+                            dismissOnTap: false,
+                          );
                           if (kDebugMode) {
                             debugPrint("apakah inih search1");
                             print(value + " ini value ");
@@ -304,14 +308,15 @@ class _OpenStreetMapSearchAndPickState
                               debugPrint("ini value ======== " + value);
                               if (decodedResponse.length == 0 &&
                                   value.isNotEmpty) {
+                                EasyLoading.dismiss();
                                 Alert(
                                     type: AlertType.warning,
                                     context: context,
-                                    desc:
-                                        "Lokasi yang anda cari tidak ditemukan",
+                                    title: "Lokasi tidak ditemukan",
+                                    desc: "coba cari lagi",
                                     buttons: [
                                       DialogButton(
-                                        color: Colors.green,
+                                        color: Colors.blue[800],
                                         child: Text(
                                           "OK",
                                           style: TextStyle(color: Colors.white),
@@ -322,20 +327,15 @@ class _OpenStreetMapSearchAndPickState
                                       )
                                     ]).show();
                               }
-                              print("ini decodeResponse" + decodedResponse.toString());
+                              print("ini lkalko" + decodedResponse.toString());
                             }
-                            _options =
-                                // (decodedResponse.isEmpty)
-                                // ? decodedResponse.map((e) => OSMdata(
-                                //     displayname: 'kosong', lat: 0, lon: 0))
-                                // :
-                                decodedResponse
-                                    .map((e) => OSMdata(
-                                        // debugPrint("apakah inih search4");
-                                        displayname: e['display_name'],
-                                        lat: double.parse(e['lat']),
-                                        lon: double.parse(e['lon'])))
-                                    .toList();
+                            _options = decodedResponse
+                                .map((e) => OSMdata(
+                                    // debugPrint("apakah inih search4");
+                                    displayname: e['display_name'],
+                                    lat: double.parse(e['lat']),
+                                    lon: double.parse(e['lon'])))
+                                .toList();
                             setState(() {});
                           } finally {
                             client.close();
