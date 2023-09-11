@@ -305,7 +305,7 @@ class _OpenStreetMapSearchAndPickState
                             if (kDebugMode) {
                               debugPrint("apakah inih search3");
                               debugPrint(decodedResponse.toString());
-                              debugPrint("ini value ======== " + value);
+                              debugPrint("ini value =====" + value);
                               if (decodedResponse.length == 0 &&
                                   value.isNotEmpty) {
                                 EasyLoading.dismiss();
