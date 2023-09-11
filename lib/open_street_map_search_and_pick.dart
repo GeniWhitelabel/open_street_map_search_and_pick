@@ -283,7 +283,7 @@ class _OpenStreetMapSearchAndPickState
                           EasyLoading.show(
                             status: 'sedang diproses',
                             maskType: EasyLoadingMaskType.black,
-                            dismissOnTap: false,
+                            dismissOnTap: true,
                           );
                           if (kDebugMode) {
                             debugPrint("apakah inih search1");
@@ -312,8 +312,7 @@ class _OpenStreetMapSearchAndPickState
                                 Alert(
                                     type: AlertType.warning,
                                     context: context,
-                                    title: "Lokasi tidak ditemukan",
-                                    desc: "coba cari lagi",
+                                    desc: "Lokasi tidak Anda ditemukan",
                                     buttons: [
                                       DialogButton(
                                         color: Colors.blue[800],
@@ -326,9 +325,12 @@ class _OpenStreetMapSearchAndPickState
                                         },
                                       )
                                     ]).show();
+                              } else {
+                                EasyLoading.dismiss();
                               }
                               print("ini lkalko" + decodedResponse.toString());
                             }
+                            EasyLoading.dismiss();
                             _options = decodedResponse
                                 .map((e) => OSMdata(
                                     // debugPrint("apakah inih search4");
