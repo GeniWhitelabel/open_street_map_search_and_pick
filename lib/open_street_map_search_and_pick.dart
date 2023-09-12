@@ -280,11 +280,11 @@ class _OpenStreetMapSearchAndPickState
                         if (_debounce?.isActive ?? false) _debounce?.cancel();
                         _debounce =
                             Timer(const Duration(milliseconds: 1000), () async {
-                          // EasyLoading.show(
-                          //   status: 'sedang diproses',
-                          //   maskType: EasyLoadingMaskType.black,
-                          //   dismissOnTap: true,
-                          // );
+                          EasyLoading.show(
+                            status: 'sedang diproses',
+                            maskType: EasyLoadingMaskType.black,
+                            dismissOnTap: true,
+                          );
                           if (kDebugMode) {
                             debugPrint("apakah inih search1");
                             print(value + " ini value ");
@@ -308,11 +308,11 @@ class _OpenStreetMapSearchAndPickState
                               debugPrint("ini value =====" + value);
                               if (decodedResponse.length == 0 &&
                                   value.isNotEmpty) {
-                                // EasyLoading.dismiss();
+                                EasyLoading.dismiss();
                                 Alert(
                                     type: AlertType.warning,
                                     context: context,
-                                    desc: "Lokasi tidak Anda ditemukan",
+                                    desc: "Lokasi yang Anda cari tidak ditemukan",
                                     buttons: [
                                       DialogButton(
                                         color: Colors.blue[800],
@@ -326,11 +326,11 @@ class _OpenStreetMapSearchAndPickState
                                       )
                                     ]).show();
                               } else {
-                                // EasyLoading.dismiss();
+                                EasyLoading.dismiss();
                               }
                               print("ini lkalko" + decodedResponse.toString());
                             }
-                            // EasyLoading.dismiss();
+                            EasyLoading.dismiss();
                             _options = decodedResponse
                                 .map((e) => OSMdata(
                                     // debugPrint("apakah inih search4");
